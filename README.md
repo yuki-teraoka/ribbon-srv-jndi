@@ -1,7 +1,6 @@
 # ribbon-srv-jndi
 
-## examample
-
+## Example
 
     Properties properties = new Properties();
     properties.put("sample-client.ribbon.NIWSServerListClassName", "com.techscore.netflix.ribbon.srv.ServerList");
