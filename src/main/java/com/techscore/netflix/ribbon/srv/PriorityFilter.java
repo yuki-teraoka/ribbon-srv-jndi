@@ -15,14 +15,10 @@ public class PriorityFilter extends ServerListSubsetFilter<SrvServer> {
             return servers;
         }
         Map<Integer, List<SrvServer>> map = servers.stream().collect(Collectors.groupingBy(SrvServer::getPriority));
-        List<SrvServer> ss = map.keySet().stream().sorted().map(map::get)
+        return map.keySet().stream().sorted().map(map::get)
           .map(super::getFilteredListOfServers)
           .filter(list -> list.size() > 0)
           .findFirst()
           .orElse(Collections.emptyList());
-        
-        System.out.println("*********");
-        System.out.println(ss);
-        return ss;
     }
 }
