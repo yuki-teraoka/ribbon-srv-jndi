@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+  jcenter()
+}
+
+group = 'com.techscore'
+version = file('VERSION').text.trim() 
+
+sourceCompatibility = targetCompatibility = 1.8
+tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
+
+wrapper {
+  gradleVersion '2.14'
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.13'
+  compile 'com.google.guava:guava:19.0'
+
+  compile "com.netflix.ribbon:ribbon-core:2.0-RC1"
+  compile "com.netflix.ribbon:ribbon-loadbalancer:2.0-RC1"
+  compile "com.netflix.ribbon:ribbon-httpclient:2.0-RC1"
+  compile "com.netflix.ribbon:ribbon-transport:2.0-RC1"
+
+  testRuntime 'ch.qos.logback:logback-classic:1.1.5'
+  testCompile 'junit:junit:4.12'
+}
+
+javadoc {
+  failOnError = false
+  options.locale = 'ja_JP'
+  options.encoding = 'UTF-8'
+  options.links << 'http://docs.oracle.com/javase/jp/8/docs/api/'
+}
+
+artifacts {
+  archives jar
+  archives sourcesJar
+  archives javadocJar
+}
